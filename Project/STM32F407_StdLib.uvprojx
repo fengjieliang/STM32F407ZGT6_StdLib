@@ -415,6 +415,11 @@
               <FileType>1</FileType>
               <FilePath>..\User_Modul\Hardware\src\bsp_led.c</FilePath>
             </File>
+            <File>
+              <FileName>bsp_button.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User_Modul\Hardware\src\bsp_button.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
