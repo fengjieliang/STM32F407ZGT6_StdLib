@@ -32,7 +32,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
-
+#include "bsp_uart.h"
 /** @addtogroup Template_Project
   * @{
   */
@@ -158,10 +158,39 @@ void SysTick_Handler(void)
   * @param  None
   * @retval None
   */
+uint8_t rx_data[256];
+uint8_t rx_data_length;
 
 void USART1_IRQHandler(void)
 {
-
+	static uint8_t temp[256];
+	static uint8_t i=0;
+	
+	
+	if (USART_GetITStatus(USART1,USART_IT_RXNE)!=RESET) 
+	{
+		temp[i] = USART_ReceiveData(USART1);
+		i++;
+	}
+	if(i>=2)
+	{
+		if(temp[i-2]==0x0D&&temp[i-1]==0x0A)
+		{
+			memcpy(rx_data,temp,sizeof(temp));
+			i=0;
+			memset(temp,0,sizeof(temp));
+			
+			for(int i=0;i<100;i++)
+			{
+				if(rx_data[i]==0x0D&&rx_data[i+1]==0x0A)
+				{
+					rx_data_length=i;
+					printf("rx_data_length=%d\r\n",rx_data_length);
+					printf("rx_data: %s",rx_data);
+				}
+			}
+		}
+	}
 }
 
 /**

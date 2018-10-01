@@ -5,11 +5,12 @@
 
 #include "bsp_led.h"
 #include "bsp_button.h"
+#include "bsp_uart.h"
 
 
 
-
-
+extern uint8_t rx_data[256];
+extern uint8_t rx_data_length;
 
 
 
