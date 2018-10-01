@@ -406,6 +406,13 @@
         </Group>
         <Group>
           <GroupName>Appication</GroupName>
+          <Files>
+            <File>
+              <FileName>delay.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User_Modul\Application\src\delay.c</FilePath>
+            </File>
+          </Files>
         </Group>
         <Group>
           <GroupName>Hardware</GroupName>

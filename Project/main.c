@@ -6,6 +6,7 @@ uint8_t key_num=0;
 int main(void)
 {
 	//Peripheral Init
+	DelayInit();
 	BSP_UART_Init(115200);
 	BSP_LEDInit();
 	BSP_ButtonInit();
@@ -15,9 +16,12 @@ int main(void)
 	
 	while(1)
 	{
-		key_num=BSP_KeyScan(1);
-		if(key_num!=0)
-			printf("key %d is pressed\r\n",key_num);
+//		key_num=BSP_KeyScan(1);
+//		if(key_num!=0)
+//			printf("key %d is pressed\r\n",key_num);
+		delay_ms(1000);
+		BSP_LED_Toggle(LED1);
+		
 	}
 
 
