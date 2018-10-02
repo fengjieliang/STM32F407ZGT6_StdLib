@@ -1,7 +1,7 @@
 #include "bsp_button.h"
 
 
-void BSP_ButtonInit(void)
+void BSP_Button_Init(void)
 {
 	GPIO_InitTypeDef	GPIO_InitStructure;
 	

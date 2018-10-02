@@ -1,7 +1,7 @@
 #include "bsp_led.h"
 
 
-void BSP_LEDInit(void)
+void BSP_LED_Init(void)
 {
 	GPIO_InitTypeDef GPIO_InitStructure;
 	

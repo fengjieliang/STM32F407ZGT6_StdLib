@@ -9,7 +9,7 @@
 
 
 
-void BSP_LEDInit(void);
+void BSP_LED_Init(void);
 void BSP_LED_On(uint16_t GPIO_Pin);
 void BSP_LED_Off(uint16_t GPIO_Pin);
 void BSP_LED_Toggle(uint16_t GPIO_Pin);

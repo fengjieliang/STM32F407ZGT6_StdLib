@@ -8,19 +8,13 @@ int main(void)
 	//Peripheral Init
 	DelayInit();
 	BSP_UART_Init(115200);
-	BSP_LEDInit();
-	BSP_ButtonInit();
-	
+	BSP_LED_Init();
+	BSP_Button_Init();
+	BSP_EEPROM_Init();
 	//Application
 	printf("STM32F407 Project\r\n");
-	
 	while(1)
 	{
-//		key_num=BSP_KeyScan(1);
-//		if(key_num!=0)
-//			printf("key %d is pressed\r\n",key_num);
-		delay_ms(1000);
-		BSP_LED_Toggle(LED1);
 		
 	}
 
