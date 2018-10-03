@@ -141,7 +141,7 @@ void UART_Menu_Set_Time(void)
 	if(rx_data[0]=='y'||rx_data[0]=='Y')
 	{
 		BSP_RTC_Set_Time(hour,min,sec,RTC_H12_AM);
-		UART_Menu_Time();
+		printf(">-----设置完成，请输入time查看日期\r\n");
 	}
 	else
 		hour=min=sec=0;
@@ -151,7 +151,96 @@ void UART_Menu_Set_Time(void)
 
 void UART_Menu_Set_Date(void)
 {
-	UART_Menu_Clear_RXData();
+	uint8_t year=0;
+	uint8_t month=0;
+	uint8_t day=0;
+	uint8_t week=0;
+	
+	bool flag_year=false;
+	bool flag_month=false;
+	bool flag_day=false;
+	bool flag_week=false;
+	
+	UART_Menu_Clear_RXData();						//清空串口接收的数据
+	
+	printf(">-----现在开始更改年份\r\n");
+	printf("  >-----请输入年份(0-99)\r\n");
+	
+	while(flag_year==false)				//循环，直到数据有效
+	{
+		while(rx_data_length<1)			//收到的长度大于1，表示有数据输入
+		{}
+		year=atoi((char *)rx_data);	//将串口接收的数据转换为数字
+		UART_Menu_Clear_RXData();		//清空串口接收的数据
+		if(year>99)								//判断数据有效性
+			printf("数据无效，请重新输入\r\n");
+		else
+			flag_year=true;						//标志置为1
+	}
+	printf("   >-----20%d年\r\n",year);
+	
+	printf("  >-----请输入月份\r\n");
+	
+	while(flag_month==false)
+	{
+		while(rx_data_length<1)			//收到的长度大于1，表示有数据输入
+		{}
+		month=atoi((char *)rx_data);
+		UART_Menu_Clear_RXData();
+		if(month>12)
+			printf("数据无效，请重新输入\r\n");
+		else
+			flag_month=true;
+	}
+	printf("   >-----%d月\r\n",month);	
+		
+	printf("  >-----请输入日期\r\n");
+	
+	while(flag_day==false)
+	{
+		while(rx_data_length<1)			//收到的长度大于1，表示有数据输入
+		{}
+		day=atoi((char *)rx_data);
+		UART_Menu_Clear_RXData();
+		if(day>31)
+			printf("数据无效，请重新输入\r\n");
+		else
+			flag_day=true;
+	}
+	printf("   >-----%d日\r\n",day);
+	
+	
+	printf("  >-----请输入星期\r\n");
+	
+	while(flag_week==false)
+	{
+		while(rx_data_length<1)			//收到的长度大于1，表示有数据输入
+		{}
+		week=atoi((char *)rx_data);
+		UART_Menu_Clear_RXData();
+		if(week>7||week==0)
+			printf("数据无效，请重新输入\r\n");
+		else
+			flag_week=true;
+	}
+	printf("   >-----星期%d\r\n",week);
+	
+	
+	
+	
+		
+	printf(">-----修改后的日期为：20%d年%d月%d日  星期%d \r\n",year,month,day,week);
+	
+	printf(">-----请确定(y/n)\r\n");
+	while(rx_data_length<1)			//收到的长度大于1，表示有数据输入
+	{}
+	if(rx_data[0]=='y'||rx_data[0]=='Y')
+	{
+		BSP_RTC_Set_Date(year,month,day,week);
+		printf(">-----设置完成，请输入time查看日期\r\n");
+	}
+	else
+		year=month=day=week=0;
 	
 	
 }
