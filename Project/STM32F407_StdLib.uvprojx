@@ -437,6 +437,11 @@
               <FileType>1</FileType>
               <FilePath>..\User_Modul\Hardware\src\bsp_eeprom.c</FilePath>
             </File>
+            <File>
+              <FileName>bsp_spi_flash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User_Modul\Hardware\src\bsp_spi_flash.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
