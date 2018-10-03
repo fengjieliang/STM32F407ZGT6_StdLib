@@ -412,6 +412,11 @@
               <FileType>1</FileType>
               <FilePath>..\User_Modul\Application\src\delay.c</FilePath>
             </File>
+            <File>
+              <FileName>uart_menu.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User_Modul\Application\src\uart_menu.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

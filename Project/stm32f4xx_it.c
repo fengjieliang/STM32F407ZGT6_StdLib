@@ -33,6 +33,7 @@
 #include <stdbool.h>
 #include <string.h>
 #include "bsp_uart.h"
+#include "uart_menu.h"
 /** @addtogroup Template_Project
   * @{
   */
@@ -180,13 +181,13 @@ void USART1_IRQHandler(void)
 			i=0;
 			memset(temp,0,sizeof(temp));
 			
-			for(int i=0;i<100;i++)
+			for(int i=0;i<256;i++)
 			{
 				if(rx_data[i]==0x0D&&rx_data[i+1]==0x0A)
 				{
 					rx_data_length=i;
-					printf("rx_data_length=%d\r\n",rx_data_length);
-					printf("rx_data: %s",rx_data);
+//					printf("rx_data_length=%d\r\n",rx_data_length);
+//					printf("rx_data: %s",rx_data);
 				}
 			}
 		}

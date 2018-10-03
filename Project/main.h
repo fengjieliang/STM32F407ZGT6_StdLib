@@ -4,6 +4,9 @@
 #include "stm32f4xx.h"
 
 #include "delay.h"
+#include "uart_menu.h"
+
+
 #include "bsp_led.h"
 #include "bsp_button.h"
 #include "bsp_uart.h"
