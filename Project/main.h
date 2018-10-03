@@ -9,6 +9,10 @@
 #include "bsp_uart.h"
 #include "bsp_eeprom.h"
 #include "bsp_spi_flash.h"
+#include "bsp_beep.h"
+
+
+
 
 
 extern uint8_t rx_data[256];
