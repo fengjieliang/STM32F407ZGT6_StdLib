@@ -43,11 +43,11 @@ void BSP_RTC_Set_Time(uint8_t hour,uint8_t min,uint8_t sec,uint8_t ampm)
 	
 }
 
-void BSP_RTC_Set_Date(uint8_t year,uint8_t month,uint8_t date,uint8_t week)
+void BSP_RTC_Set_Date(uint8_t year,uint8_t month,uint8_t day,uint8_t week)
 {
 	
 	RTC_DateTypeDef RTC_DateTypeInitStructure;
-	RTC_DateTypeInitStructure.RTC_Date=date;
+	RTC_DateTypeInitStructure.RTC_Date=day;
 	RTC_DateTypeInitStructure.RTC_Month=month;
 	RTC_DateTypeInitStructure.RTC_WeekDay=week;
 	RTC_DateTypeInitStructure.RTC_Year=year;
@@ -58,7 +58,7 @@ void BSP_RTC_Set_Date(uint8_t year,uint8_t month,uint8_t date,uint8_t week)
 
 
 
-void BSP_RTC_GetDate(uint8_t *year,uint8_t *month,uint8_t *date,uint8_t *weekday)
+void BSP_RTC_GetDate(uint8_t *year,uint8_t *month,uint8_t *day,uint8_t *weekday)
 {
 	RTC_DateTypeDef RTC_DateStruct;
 
@@ -66,7 +66,7 @@ void BSP_RTC_GetDate(uint8_t *year,uint8_t *month,uint8_t *date,uint8_t *weekday
 	
 	*year		= RTC_DateStruct.RTC_Year;
 	*month	=	RTC_DateStruct.RTC_Month;
-	*date		=	RTC_DateStruct.RTC_Date;
+	*day		=	RTC_DateStruct.RTC_Date;
 	*weekday=	RTC_DateStruct.RTC_WeekDay;
 }
 
