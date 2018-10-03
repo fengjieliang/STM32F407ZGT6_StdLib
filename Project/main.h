@@ -10,7 +10,7 @@
 #include "bsp_eeprom.h"
 #include "bsp_spi_flash.h"
 #include "bsp_beep.h"
-
+#include "bsp_rtc.h"
 
 
 
