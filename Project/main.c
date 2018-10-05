@@ -19,9 +19,6 @@ int main(void)
 	
 	while(1)
 	{
-
-//		
-//		delay_ms(1000);
 		UART_Menu_Handler();
 		
 	}
