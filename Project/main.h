@@ -15,8 +15,10 @@
 #include "bsp_beep.h"
 #include "bsp_rtc.h"
 
+#include "rtos_task.h"
 
-
+#include "FreeRTOS.h"
+#include "task.h"
 
 extern uint8_t rx_data[256];
 extern uint8_t rx_data_length;
