@@ -14,6 +14,9 @@
 #include "bsp_spi_flash.h"
 #include "bsp_beep.h"
 #include "bsp_rtc.h"
+#include "bsp_timer.h"
+
+#include "DS18B20.h"
 
 #include "rtos_task.h"
 
