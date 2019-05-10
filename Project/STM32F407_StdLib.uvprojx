@@ -427,6 +427,11 @@
               <FileType>1</FileType>
               <FilePath>..\User_Modul\Application\src\rtos_task.c</FilePath>
             </File>
+            <File>
+              <FileName>ESP01.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User_Modul\Application\src\ESP01.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
