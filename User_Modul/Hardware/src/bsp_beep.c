@@ -1,7 +1,7 @@
 #include "bsp_beep.h"
 
 
-void BSP_BEEP_Init(void)
+void bsp_beep_init(void)
 {
 	GPIO_InitTypeDef GPIO_InitStructure;
 	
@@ -17,25 +17,25 @@ void BSP_BEEP_Init(void)
 
 }
 
-void BSP_BEEP_Off(void)
+void bsp_beep_off(void)
 {
 	GPIO_ResetBits(GPIOF, GPIO_Pin_8);
 }
 
 
-void BSP_BEEP_On(void)
+void bsp_beep_on(void)
 {
 	GPIO_SetBits(GPIOF, GPIO_Pin_8);
 }
 
 
-void BSP_Alarm(uint8_t num)
+void bsp_alarm(uint8_t num)
 {
 	for(int i=0;i<num;i++)
 	{
-		BSP_BEEP_On();
+		bsp_beep_on();
 		delay_ms(300);
-		BSP_BEEP_Off();
+		bsp_beep_off();
 		delay_ms(300);
 	}
 

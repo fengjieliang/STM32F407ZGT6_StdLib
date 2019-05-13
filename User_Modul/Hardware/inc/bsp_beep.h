@@ -6,10 +6,10 @@
 
 
 
-void BSP_BEEP_Init(void);
-void BSP_BEEP_On(void);
-void BSP_BEEP_Off(void);
-void BSP_Alarm(uint8_t num);
+void bsp_beep_init(void);
+void bsp_beep_on(void);
+void bsp_beep_off(void);
+void bsp_alarm(uint8_t num);
 
 
 

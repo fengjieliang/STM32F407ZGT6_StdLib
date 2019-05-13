@@ -1,7 +1,7 @@
 #include "bsp_led.h"
-
-
-void BSP_LED_Init(void)
+#include "delay.h"
+#include "stdio.h"
+void bsp_led_init(void)
 {
 	GPIO_InitTypeDef GPIO_InitStructure;
 	
@@ -15,14 +15,14 @@ void BSP_LED_Init(void)
 
 	GPIO_Init(GPIOF,&GPIO_InitStructure);
 
-	BSP_LED_Off(LED1);
-	BSP_LED_Off(LED2);
+	bsp_led_off(LED1);
+	bsp_led_off(LED2);
 	
 }
 
 
 
-void BSP_LED_On(uint16_t GPIO_Pin)
+void bsp_led_on(uint16_t GPIO_Pin)
 {
 	if (GPIO_Pin==LED1)
 	GPIO_ResetBits(GPIOF,LED1);
@@ -33,7 +33,7 @@ void BSP_LED_On(uint16_t GPIO_Pin)
 }
 
 
-void BSP_LED_Off(uint16_t GPIO_Pin)
+void bsp_led_off(uint16_t GPIO_Pin)
 {
 	if (GPIO_Pin==LED1)
 	GPIO_SetBits(GPIOF,LED1);
@@ -44,7 +44,7 @@ void BSP_LED_Off(uint16_t GPIO_Pin)
 }
 
 
-void BSP_LED_Toggle(uint16_t GPIO_Pin)
+void bsp_led_toggle(uint16_t GPIO_Pin)
 {
 	if (GPIO_Pin==LED1)
 	GPIO_ToggleBits(GPIOF,LED1);
@@ -52,4 +52,16 @@ void BSP_LED_Toggle(uint16_t GPIO_Pin)
 	if (GPIO_Pin==LED2)
 	GPIO_ToggleBits(GPIOF,LED2);
 
+}
+
+
+
+void bsp_led_flash(uint16_t GPIO_Pin,uint16_t flash_num, uint16_t interval)
+{
+	for(int i=0;i<flash_num;i++)
+	{
+		printf("i=%d\r\n",i);
+		bsp_led_toggle(GPIO_Pin);
+		delay_ms(interval);
+	}
 }

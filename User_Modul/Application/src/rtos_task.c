@@ -21,14 +21,14 @@ void vTaskLED(void *pvParameters)
 	{
 		if(*piParameters==1)
 		{
-			BSP_LED_Toggle(LED1);
+			bsp_led_toggle(LED1);
     /* 阻塞延时，单位ms */        
        vTaskDelay( 100 );
 		
 		}
 		else if (*piParameters==2)
 		{
-			BSP_LED_Toggle(LED2);
+			bsp_led_toggle(LED2);
     /* 阻塞延时，单位ms */        
        vTaskDelay( 100 );
 		
@@ -46,8 +46,8 @@ void vTaskLed1(void *pvParameters)
     /* 任务都是一个无限，不能返回 */
     while(1)
     {
-       BSP_LED_On(LED1);
-			BSP_LED_Off(LED2);
+       bsp_led_on(LED1);
+			bsp_led_off(LED2);
 //			 printf("LED1\r\n");
     /* 阻塞延时，单位ms */        
 //       vTaskDelay(500);
@@ -62,7 +62,7 @@ void vTaskLed2(void *pvParameters)
     /* 任务都是一个无限，不能返回 */
     while(1)
     {
-       BSP_LED_On(LED2);
+       bsp_led_on(LED2);
 			 
     /* 阻塞延时，单位ms */        
 //        vTaskDelay(100);

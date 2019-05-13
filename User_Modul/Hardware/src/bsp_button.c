@@ -1,7 +1,7 @@
 #include "bsp_button.h"
 
 
-void BSP_Button_Init(void)
+void bsp_button_init(void)
 {
 	GPIO_InitTypeDef	GPIO_InitStructure;
 	
@@ -22,7 +22,7 @@ void BSP_Button_Init(void)
 }
 
 
-uint8_t BSP_KeyScan(uint8_t mode)			//mode=1 连续按		mode=0 单独按
+uint8_t bsp_keyscan(uint8_t mode)			//mode=1 连续按		mode=0 单独按
 {
 	static uint8_t key_up=1;		//key_up=1	连续按	key_up=0 单独按
 	if (mode==1)

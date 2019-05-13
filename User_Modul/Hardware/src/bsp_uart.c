@@ -1,7 +1,7 @@
 #include "bsp_uart.h"
 
 
-void BSP_UART_Init(u32 baudrate)
+void bsp_uart_init(u32 baudrate)
 {
 	GPIO_InitTypeDef GPIO_InitStructure;
 	USART_InitTypeDef USART_InitStructure;

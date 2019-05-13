@@ -11,11 +11,11 @@
 
 void BSP_EEPROM_Init(void);
 
-void BSP_EEPROM_WriteOneByte(uint16_t MemAddress, uint8_t Data);
-void BSP_EEPROM_WritePage(uint16_t MemAddress, uint8_t *pData, uint8_t size);
-void BSP_EEPROM_WriteBuffer(uint16_t MemAddress, uint8_t *pData, uint16_t size);
-void EEPROM_ReadOneByte(uint16_t MemAddress, uint8_t *pData);
-void EEPROM_ReadBuffer(uint16_t MemAddress, uint8_t *pData,uint16_t size);
+void bsp_eeprom_writeonebyte(uint16_t MemAddress, uint8_t Data);
+void bsp_eeprom_writepage(uint16_t MemAddress, uint8_t *pData, uint8_t size);
+void bsp_eeprom_writebuffer(uint16_t MemAddress, uint8_t *pData, uint16_t size);
+void eeprom_readonebyte(uint16_t MemAddress, uint8_t *pData);
+void eeprom_readbuffer(uint16_t MemAddress, uint8_t *pData,uint16_t size);
 
 
 

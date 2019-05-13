@@ -1,6 +1,6 @@
 #include "bsp_rtc.h"
 
-void BSP_RTC_Init(void)
+void bsp_rtc_init(void)
 {
 	RTC_InitTypeDef RTC_InitStructure;
 	
@@ -20,8 +20,8 @@ void BSP_RTC_Init(void)
     RTC_InitStructure.RTC_HourFormat   = RTC_HourFormat_24;//RTC设置为,24小时格式
     RTC_Init(&RTC_InitStructure);
  
-		BSP_RTC_Set_Time(15,45,20,RTC_H12_AM);	//设置时间
-		BSP_RTC_Set_Date(18,10,3,3);		//设置日期
+		bsp_rtc_set_time(15,45,20,RTC_H12_AM);	//设置时间
+		bsp_rtc_set_date(18,10,3,3);		//设置日期
 	 
 		RTC_WriteBackupRegister(RTC_BKP_DR0,0x5051);	//标记已经初始化过了
 	} 
@@ -30,7 +30,7 @@ void BSP_RTC_Init(void)
 
 
 
-void BSP_RTC_Set_Time(uint8_t hour,uint8_t min,uint8_t sec,uint8_t ampm)
+void bsp_rtc_set_time(uint8_t hour,uint8_t min,uint8_t sec,uint8_t ampm)
 {
 	RTC_TimeTypeDef RTC_TimeTypeInitStructure;
 	
@@ -43,7 +43,7 @@ void BSP_RTC_Set_Time(uint8_t hour,uint8_t min,uint8_t sec,uint8_t ampm)
 	
 }
 
-void BSP_RTC_Set_Date(uint8_t year,uint8_t month,uint8_t day,uint8_t week)
+void bsp_rtc_set_date(uint8_t year,uint8_t month,uint8_t day,uint8_t week)
 {
 	
 	RTC_DateTypeDef RTC_DateTypeInitStructure;
@@ -58,7 +58,7 @@ void BSP_RTC_Set_Date(uint8_t year,uint8_t month,uint8_t day,uint8_t week)
 
 
 
-void BSP_RTC_GetDate(uint8_t *year,uint8_t *month,uint8_t *day,uint8_t *weekday)
+void bsp_rtc_getdate(uint8_t *year,uint8_t *month,uint8_t *day,uint8_t *weekday)
 {
 	RTC_DateTypeDef RTC_DateStruct;
 
@@ -72,7 +72,7 @@ void BSP_RTC_GetDate(uint8_t *year,uint8_t *month,uint8_t *day,uint8_t *weekday)
 
 
 
-void BSP_RTC_GetTime(uint8_t *hour,uint8_t *min,uint8_t *sec)
+void bsp_rtc_gettime(uint8_t *hour,uint8_t *min,uint8_t *sec)
 {
 	RTC_TimeTypeDef RTC_TimeStruct;
 

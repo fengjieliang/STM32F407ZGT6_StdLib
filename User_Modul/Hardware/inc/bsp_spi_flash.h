@@ -90,22 +90,18 @@
 
 
 
-void BSP_SPI_FLASH_Init(void);
-uint8_t SPI_FLASH_ByteWrite(uint8_t data);
-uint8_t SPI_FLASH_Read_ID(void);
+void bsp_spi_flash_init(void);
+uint8_t spi_flash_bytewrite(uint8_t data);
+uint8_t spi_flash_read_id(void);
 
-static uint8_t BSP_W25Qx_GetStatus(void);
-void W25X128_WaitForWriteEnd(void);
+static uint8_t bsp_w25qx_getstatus(void);
+void w25x128_wait_for_write_end(void);
 
+void w25x128_chiperase(void);
+void w25x128_sectorerase(uint32_t flashAddr);
+void w25x128_blockerase(uint8_t BlockNum);
 
-
-
-void W25X128_ChipErase(void);
-void W25X128_SectorErase(uint32_t flashAddr);
-void W25X128_BlockErase(uint8_t BlockNum);
-
-
-void W25X128_BufferRead(uint8_t *pData, uint16_t length, uint32_t read_addr);
-void W25X128_PageWrite(uint8_t *pData, uint16_t length, uint32_t page_addr);
-void W25X128_BufferWrite(uint8_t *pData, uint16_t data_length, uint32_t write_addr);
+void w25x128_bufferread(uint8_t *pData, uint16_t length, uint32_t read_addr);
+void w25x128_pagewrite(uint8_t *pData, uint16_t length, uint32_t page_addr);
+void w25x128_bufferwrite(uint8_t *pData, uint16_t data_length, uint32_t write_addr);
 #endif

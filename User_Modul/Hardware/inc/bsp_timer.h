@@ -3,8 +3,8 @@
 
 #include "stm32f4xx.h"
 
-
-void BSP_Timer2_Init(uint32_t period);
+void bsp_timer_init(void);
+void bsp_timer5_init(uint32_t period);
 
 
 

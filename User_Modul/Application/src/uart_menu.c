@@ -67,9 +67,9 @@ void UART_Menu_Time(void)
 		uint8_t date=0;
 		uint8_t weekday=0;
 	
-		BSP_RTC_GetDate(&year,&month,&date,&weekday);
+		bsp_rtc_getdate(&year,&month,&date,&weekday);
 		printf("20%d年%d月%d日 星期%d ",year,month,date,weekday);
-		BSP_RTC_GetTime(&hour,&min,&sec);
+		bsp_rtc_gettime(&hour,&min,&sec);
 		printf("%d点%d分%d秒\r\n",hour,min,sec);
 
 }
@@ -140,7 +140,7 @@ void UART_Menu_Set_Time(void)
 	{}
 	if(rx_data[0]=='y'||rx_data[0]=='Y')
 	{
-		BSP_RTC_Set_Time(hour,min,sec,RTC_H12_AM);
+		bsp_rtc_set_time(hour,min,sec,RTC_H12_AM);
 		printf(">-----设置完成，请输入time查看日期\r\n");
 	}
 	else
@@ -236,7 +236,7 @@ void UART_Menu_Set_Date(void)
 	{}
 	if(rx_data[0]=='y'||rx_data[0]=='Y')
 	{
-		BSP_RTC_Set_Date(year,month,day,week);
+		bsp_rtc_set_date(year,month,day,week);
 		printf(">-----设置完成，请输入time查看日期\r\n");
 	}
 	else

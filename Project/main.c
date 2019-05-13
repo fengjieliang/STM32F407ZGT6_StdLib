@@ -3,21 +3,22 @@
 int main(void)
 {
 	//Peripheral Init
-	DelayInit();
-	BSP_UART_Init(115200);
+	delay_init();
+	bsp_uart_init(115200);
+	bsp_timer_init();
 	printf("Hello World\r\n");
-	BSP_LED_Init();
-//	BSP_Button_Init();
-//	BSP_EEPROM_Init();
-//	BSP_SPI_FLASH_Init();
-//	BSP_BEEP_Init();
-//	BSP_RTC_Init();
-//	BSP_Timer2_Init(1000);
+	bsp_led_init();
+//	bsp_button_init();
+//	bsp_eeprom_init();
+//	bsp_spi_flash_init();
+//	bsp_beep_init();
+//	bsp_rtc_init();
+	bsp_led_flash(LED1,10,300);
 	
-	AppTaskCreate();
+//	AppTaskCreate();
+//	
+//	vTaskStartScheduler();
 	
-	vTaskStartScheduler();
-
 
 		
 	while(1)

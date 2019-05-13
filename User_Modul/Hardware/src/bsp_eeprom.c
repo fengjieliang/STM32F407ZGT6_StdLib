@@ -1,7 +1,7 @@
 #include "bsp_eeprom.h"
 
 
-void BSP_EEPROM_Init(void)
+void bsp_eeprom_init(void)
 {
 	I2C_InitTypeDef I2C_InitStructure;
 	GPIO_InitTypeDef GPIO_InitStructure;
@@ -39,7 +39,7 @@ void BSP_EEPROM_Init(void)
 
 
 
-void BSP_EEPROM_WriteOneByte(uint16_t MemAddress, uint8_t Data)
+void bsp_eeprom_writeonebyte(uint16_t MemAddress, uint8_t Data)
 {
 	I2C_GenerateSTART(I2C1,ENABLE);
 	
@@ -63,7 +63,7 @@ void BSP_EEPROM_WriteOneByte(uint16_t MemAddress, uint8_t Data)
 
 
 
-void BSP_EEPROM_WritePage(uint16_t MemAddress, uint8_t *pData, uint8_t size)
+void bsp_eeprom_writepage(uint16_t MemAddress, uint8_t *pData, uint8_t size)
 {
 	if(size>EEPROM_PageSize)
 	{
@@ -99,7 +99,7 @@ void BSP_EEPROM_WritePage(uint16_t MemAddress, uint8_t *pData, uint8_t size)
 
 
 
-void BSP_EEPROM_WriteBuffer(uint16_t MemAddress, uint8_t *pData, uint16_t size)
+void bsp_eeprom_writebuffer(uint16_t MemAddress, uint8_t *pData, uint16_t size)
 {
 	if((MemAddress+size)>256)
 	{
@@ -117,17 +117,17 @@ void BSP_EEPROM_WriteBuffer(uint16_t MemAddress, uint8_t *pData, uint16_t size)
 
 		while(number_of_page--)
 		{
-			BSP_EEPROM_WritePage(MemAddress,pData,EEPROM_PageSize);
+			bsp_eeprom_writepage(MemAddress,pData,EEPROM_PageSize);
 			MemAddress+=EEPROM_PageSize;
 			pData+=EEPROM_PageSize;
 		}
-		BSP_EEPROM_WritePage(MemAddress,pData,remainder);
+		bsp_eeprom_writepage(MemAddress,pData,remainder);
 	}
 	else //地址没有对齐
 	{
 		uint8_t number_of_bytes = EEPROM_PageSize-MemAddress%EEPROM_PageSize;
 		
-		BSP_EEPROM_WritePage(MemAddress,pData,number_of_bytes);
+		bsp_eeprom_writepage(MemAddress,pData,number_of_bytes);
 		MemAddress+=number_of_bytes;
 		pData+=number_of_bytes;
 		size-=number_of_bytes;
@@ -137,11 +137,11 @@ void BSP_EEPROM_WriteBuffer(uint16_t MemAddress, uint8_t *pData, uint16_t size)
 		
 		while(number_of_page--)
 		{
-			BSP_EEPROM_WritePage(MemAddress,pData,EEPROM_PageSize);
+			bsp_eeprom_writepage(MemAddress,pData,EEPROM_PageSize);
 			MemAddress+=EEPROM_PageSize;
 			pData+=EEPROM_PageSize;
 		}
-		BSP_EEPROM_WritePage(MemAddress,pData,remainder);
+		bsp_eeprom_writepage(MemAddress,pData,remainder);
 		
 	}
 	
@@ -153,7 +153,7 @@ void BSP_EEPROM_WriteBuffer(uint16_t MemAddress, uint8_t *pData, uint16_t size)
 
 
 
-void EEPROM_ReadOneByte(uint16_t MemAddress, uint8_t *pData)
+void eeprom_readonebyte(uint16_t MemAddress, uint8_t *pData)
 {
 	I2C_GenerateSTART(I2C1,ENABLE);
 
@@ -193,7 +193,7 @@ void EEPROM_ReadOneByte(uint16_t MemAddress, uint8_t *pData)
 
 
 
-void EEPROM_ReadBuffer(uint16_t MemAddress, uint8_t *pData,uint16_t size)
+void eeprom_readbuffer(uint16_t MemAddress, uint8_t *pData,uint16_t size)
 {
 	I2C_GenerateSTART(I2C1,ENABLE);
 	while((!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_MODE_SELECT)));

@@ -41,7 +41,7 @@ void DS18B20_Pin_In_Init(void)
 
 
 
-void DS18B20_Init()
+void ds18b20_init()
 {
 		DS18B20_Pin_Out_Init();
     GPIO_SetBits(GPIOG,GPIO_Pin_9);
@@ -117,17 +117,17 @@ uint8_t DS18B20_Read()
  * @brief Function for reading temperature from sensor DS18B20.
  * @param[out] temperature.
  */
-float ReadTemperature_DS18B20(void)
+float ds18b20_read_temperature(void)
 {
     float temp_DS18B20 = 0;
 		uint8_t temp_L, temp_H;
 		int16_t temp_int16;
 	
-    DS18B20_Init();
+    ds18b20_init();
     DS18B20_Write(0xcc);                        //skip rom
     DS18B20_Write(0x44);                        //convert temperature
     delay_us(20);
-    DS18B20_Init();
+    ds18b20_init();
     DS18B20_Write(0xcc);                        //skip rom
     DS18B20_Write(0xbe);                        //Read Scratchpad
     temp_L = DS18B20_Read();

@@ -1,7 +1,7 @@
 #include "bsp_spi_flash.h"
 
 
-void BSP_SPI_FLASH_Init(void)
+void bsp_spi_flash_init(void)
 {
 	GPIO_InitTypeDef  GPIO_InitStructure; 
    
@@ -51,7 +51,7 @@ void BSP_SPI_FLASH_Init(void)
 
 
 
-uint8_t SPI_FLASH_ByteWrite(uint8_t data)
+uint8_t spi_flash_bytewrite(uint8_t data)
 {
 	uint8_t re_data;
 	
@@ -70,33 +70,33 @@ uint8_t SPI_FLASH_ByteWrite(uint8_t data)
 
 
 
-uint8_t SPI_FLASH_Read_ID(void)
+uint8_t spi_flash_read_id(void)
 {
 	uint8_t id;
 	//控制片选引脚
 	W25X128_Enable();
 	
 	//指令代码
-	SPI_FLASH_ByteWrite(READ_ID_CMD);
+	spi_flash_bytewrite(READ_ID_CMD);
 	
-	SPI_FLASH_ByteWrite(DUMMY);
-	SPI_FLASH_ByteWrite(DUMMY);
-	SPI_FLASH_ByteWrite(DUMMY);
+	spi_flash_bytewrite(DUMMY);
+	spi_flash_bytewrite(DUMMY);
+	spi_flash_bytewrite(DUMMY);
 	
 	//接收读取到的内容
-	id = SPI_FLASH_ByteWrite(DUMMY);
+	id = spi_flash_bytewrite(DUMMY);
 	W25X128_Disable();
 	return id;
 
 }
 
-static uint8_t BSP_W25Qx_GetStatus(void)
+static uint8_t bsp_w25qx_getstatus(void)
 {
 	uint8_t status1;
 	
 	W25X128_Enable();
-	SPI_FLASH_ByteWrite(READ_STATUS_REG1_CMD);
-	status1=SPI_FLASH_ByteWrite(DUMMY);
+	spi_flash_bytewrite(READ_STATUS_REG1_CMD);
+	status1=spi_flash_bytewrite(DUMMY);
 	W25X128_Disable();
 	
 	if((status1 & W25Q128FV_FSR_BUSY) != 0)
@@ -113,52 +113,52 @@ static uint8_t BSP_W25Qx_GetStatus(void)
 
 
 
-void W25X128_WaitForWriteEnd(void)
+void w25x128_wait_for_write_end(void)
 {
-	while(BSP_W25Qx_GetStatus()==W25Qx_BUSY)
+	while(bsp_w25qx_getstatus()==W25Qx_BUSY)
 	{}
 }
 
 
-void W25X128_WriteEnable(void)
+void w25x128_writeenable(void)
 {
 	W25X128_Enable();
 	
-	SPI_FLASH_ByteWrite(WRITE_ENABLE_CMD);
+	spi_flash_bytewrite(WRITE_ENABLE_CMD);
 	
 	W25X128_Disable();
 	
-	W25X128_WaitForWriteEnd();
+	w25x128_wait_for_write_end();
 
 }
 
 
-void W25X128_WriteDisable(void)
+void w25x128_writedisable(void)
 {
 	W25X128_Enable();
 	
-	SPI_FLASH_ByteWrite(WRITE_DISABLE_CMD);
+	spi_flash_bytewrite(WRITE_DISABLE_CMD);
 	
 	W25X128_Disable();
 	
-	W25X128_WaitForWriteEnd();
+	w25x128_wait_for_write_end();
 }
 
 
-void W25X128_ChipErase(void)
+void w25x128_chiperase(void)
 {
-	W25X128_WriteEnable();
+	w25x128_writeenable();
 	
 	W25X128_Enable();
-	SPI_FLASH_ByteWrite(CHIP_ERASE_CMD);
+	spi_flash_bytewrite(CHIP_ERASE_CMD);
 	W25X128_Disable();
-	W25X128_WaitForWriteEnd();
+	w25x128_wait_for_write_end();
 	printf("Chip Erase finish.\r\n");
 }
 
 
 
-void W25X128_SectorErase(uint32_t flashAddr)
+void w25x128_sectorerase(uint32_t flashAddr)
 {
 	
 	
@@ -169,20 +169,20 @@ void W25X128_SectorErase(uint32_t flashAddr)
 	cmd[2]=((flashAddr & 0xFF00) >> 8);
 	cmd[3]=(flashAddr & 0xFF);
 	
-	W25X128_WriteEnable();
+	w25x128_writeenable();
 	W25X128_Enable();
-	SPI_FLASH_ByteWrite(cmd[0]);
-	SPI_FLASH_ByteWrite(cmd[1]);
-	SPI_FLASH_ByteWrite(cmd[2]);
-	SPI_FLASH_ByteWrite(cmd[3]);
+	spi_flash_bytewrite(cmd[0]);
+	spi_flash_bytewrite(cmd[1]);
+	spi_flash_bytewrite(cmd[2]);
+	spi_flash_bytewrite(cmd[3]);
 	W25X128_Disable();
 	
-	W25X128_WaitForWriteEnd();
+	w25x128_wait_for_write_end();
 	
 }
 
 
-void W25X128_BlockErase(uint8_t BlockNum)
+void w25x128_blockerase(uint8_t BlockNum)
 {
 	if(BlockNum>255)
 		printf("BlockNum must be between 0 and 255. Please check it.");
@@ -191,7 +191,7 @@ void W25X128_BlockErase(uint8_t BlockNum)
 	
 	flashAddr=BlockNum*(0x10000);
 	
-	W25X128_WriteEnable();
+	w25x128_writeenable();
 	
 	uint8_t cmd[4]={0};
 	
@@ -202,18 +202,18 @@ void W25X128_BlockErase(uint8_t BlockNum)
 	
 	
 	W25X128_Enable();
-	SPI_FLASH_ByteWrite(cmd[0]);
-	SPI_FLASH_ByteWrite(cmd[1]);
-	SPI_FLASH_ByteWrite(cmd[2]);
-	SPI_FLASH_ByteWrite(cmd[3]);
+	spi_flash_bytewrite(cmd[0]);
+	spi_flash_bytewrite(cmd[1]);
+	spi_flash_bytewrite(cmd[2]);
+	spi_flash_bytewrite(cmd[3]);
 	W25X128_Disable();
 	
-	W25X128_WaitForWriteEnd();
+	w25x128_wait_for_write_end();
 	
 }
 
 
-void W25X128_BufferRead(uint8_t *pData, uint16_t length, uint32_t read_addr)
+void w25x128_bufferread(uint8_t *pData, uint16_t length, uint32_t read_addr)
 {
     uint8_t cmd[4];
     cmd[0] = READ_CMD;
@@ -221,30 +221,30 @@ void W25X128_BufferRead(uint8_t *pData, uint16_t length, uint32_t read_addr)
     cmd[2] = ((read_addr & 0xFF00) >> 8);
     cmd[3] = (read_addr & 0xFF);
 		
-		W25X128_WriteEnable();
+		w25x128_writeenable();
 		W25X128_Enable();
-		SPI_FLASH_ByteWrite(cmd[0]);
-		SPI_FLASH_ByteWrite(cmd[1]);
-		SPI_FLASH_ByteWrite(cmd[2]);
-		SPI_FLASH_ByteWrite(cmd[3]);
+		spi_flash_bytewrite(cmd[0]);
+		spi_flash_bytewrite(cmd[1]);
+		spi_flash_bytewrite(cmd[2]);
+		spi_flash_bytewrite(cmd[3]);
 	
 		for(int i=0;i<length;i++)
 		{
-			*pData=SPI_FLASH_ByteWrite(DUMMY);
+			*pData=spi_flash_bytewrite(DUMMY);
 			pData++;
 		}
 	
 		
 		W25X128_Disable();
 
-    W25X128_WaitForWriteEnd();
+    w25x128_wait_for_write_end();
 	
 		
 }
 
 
 
-void W25X128_PageWrite(uint8_t *pData, uint16_t length, uint32_t page_addr)
+void w25x128_pagewrite(uint8_t *pData, uint16_t length, uint32_t page_addr)
 {
 	if (length > 256) {
         printf("data length must be between 0 and 256. Please check it.");
@@ -257,26 +257,26 @@ void W25X128_PageWrite(uint8_t *pData, uint16_t length, uint32_t page_addr)
 	cmd[2]=((page_addr & 0xFF00) >> 8);
 	cmd[3]=(page_addr & 0xFF);	
 		
-	W25X128_WriteEnable();	
+	w25x128_writeenable();	
 	W25X128_Enable();
-	SPI_FLASH_ByteWrite(cmd[0]);
-	SPI_FLASH_ByteWrite(cmd[1]);
-	SPI_FLASH_ByteWrite(cmd[2]);
-	SPI_FLASH_ByteWrite(cmd[3]);
+	spi_flash_bytewrite(cmd[0]);
+	spi_flash_bytewrite(cmd[1]);
+	spi_flash_bytewrite(cmd[2]);
+	spi_flash_bytewrite(cmd[3]);
 	
 	for(int i=0;i<length;i++)
 	{
-		SPI_FLASH_ByteWrite(*pData);
+		spi_flash_bytewrite(*pData);
 		pData++;
 	}
 		
 	W25X128_Disable();	
 
-	W25X128_WaitForWriteEnd();	
+	w25x128_wait_for_write_end();	
 }
 
 
-void W25X128_BufferWrite(uint8_t *pData, uint16_t data_length, uint32_t write_addr)
+void w25x128_bufferwrite(uint8_t *pData, uint16_t data_length, uint32_t write_addr)
 {
 		uint8_t Num_of_Page = 0;
     uint8_t Num_of_Single = 0;
@@ -295,14 +295,14 @@ void W25X128_BufferWrite(uint8_t *pData, uint16_t data_length, uint32_t write_ad
 		if (Addr == 0) {
         //data_length<Page Size
         if (Num_of_Page == 0)
-            W25X128_PageWrite(pData, data_length, write_addr);
+            w25x128_pagewrite(pData, data_length, write_addr);
         else {      //data_length>Page Size
             while (Num_of_Page--) {
-                W25X128_PageWrite(pData, W25Q128FV_PAGE_SIZE, write_addr);
+                w25x128_pagewrite(pData, W25Q128FV_PAGE_SIZE, write_addr);
                 pData += W25Q128FV_PAGE_SIZE;
                 write_addr += W25Q128FV_PAGE_SIZE;
             }
-            W25X128_PageWrite(pData, Num_of_Single, write_addr);
+            w25x128_pagewrite(pData, Num_of_Single, write_addr);
 
         }
 
@@ -311,31 +311,31 @@ void W25X128_BufferWrite(uint8_t *pData, uint16_t data_length, uint32_t write_ad
         if (Num_of_Page == 0) {
             if (Num_of_Single > count) {
                 temp = Num_of_Single - count;
-                W25X128_PageWrite(pData, count, write_addr);
+                w25x128_pagewrite(pData, count, write_addr);
                 pData += count;
                 write_addr += count;
 
-                W25X128_PageWrite(pData, temp, write_addr);
+                w25x128_pagewrite(pData, temp, write_addr);
             } else {
-                W25X128_PageWrite(pData, data_length, write_addr);
+                w25x128_pagewrite(pData, data_length, write_addr);
             }
         } else {
             data_length -= count;
             Num_of_Page = data_length / W25Q128FV_PAGE_SIZE;
             Num_of_Single = data_length % W25Q128FV_PAGE_SIZE;
 
-            W25X128_PageWrite(pData, count, write_addr);
+            w25x128_pagewrite(pData, count, write_addr);
             write_addr += count;
             pData += count;
 
             while (Num_of_Page--) {
-                W25X128_PageWrite(pData, W25Q128FV_PAGE_SIZE, write_addr);
+                w25x128_pagewrite(pData, W25Q128FV_PAGE_SIZE, write_addr);
                 write_addr += W25Q128FV_PAGE_SIZE;
                 pData += W25Q128FV_PAGE_SIZE;
             }
 
             if (Num_of_Single != 0) {
-                W25X128_PageWrite(pData, Num_of_Single, write_addr);
+                w25x128_pagewrite(pData, Num_of_Single, write_addr);
             }
 
         }

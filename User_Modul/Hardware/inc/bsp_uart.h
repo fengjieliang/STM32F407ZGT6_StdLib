@@ -4,7 +4,7 @@
 #include "stm32f4xx.h"
 #include <stdio.h>
 
-void BSP_UART_Init(u32 baudrate);
+void bsp_uart_init(u32 baudrate);
 void USART_SendByte(USART_TypeDef * pUSARTx, uint8_t ch);
 void USART_SendString(USART_TypeDef * pUSARTx, char *Data);
 

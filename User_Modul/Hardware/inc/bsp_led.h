@@ -9,11 +9,11 @@
 
 
 
-void BSP_LED_Init(void);
-void BSP_LED_On(uint16_t GPIO_Pin);
-void BSP_LED_Off(uint16_t GPIO_Pin);
-void BSP_LED_Toggle(uint16_t GPIO_Pin);
-
+void bsp_led_init(void);
+void bsp_led_on(uint16_t GPIO_Pin);
+void bsp_led_off(uint16_t GPIO_Pin);
+void bsp_led_toggle(uint16_t GPIO_Pin);
+void bsp_led_flash(uint16_t GPIO_Pin,uint16_t flash_num, uint16_t interval);
 
 
 

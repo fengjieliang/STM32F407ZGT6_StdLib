@@ -231,14 +231,19 @@ void UART4_IRQHandler(void)
 }
 
 
-void TIM2_IRQHandler(void)
+void TIM5_IRQHandler(void)
 {
-	if(TIM_GetFlagStatus(TIM2,TIM_FLAG_Update) == SET)
+	if(TIM_GetFlagStatus(TIM5,TIM_FLAG_Update) == SET)
 	{
 		static float temperature;
-		temperature=ReadTemperature_DS18B20();
+		
+		do
+		{
+			temperature=ds18b20_read_temperature();
+		}while(temperature<-20&&temperature>45);
+		
 		printf("temperature=%f\r\n",temperature);
-		TIM_ClearFlag(TIM2,TIM_FLAG_Update);
+		TIM_ClearFlag(TIM5,TIM_FLAG_Update);
 	}
 	
 	
